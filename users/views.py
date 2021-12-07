@@ -7,16 +7,20 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.views import View
 from django.contrib.auth.views import LoginView as LogView
-
+from django.contrib.auth.forms import UserCreationForm
 
 
 class SignupView(CreateView):
-    template_name = "users/signup.html"
-    form_class = forms.UserSignupForm
-    success_url = reverse_lazy("users:login")
+
+    template_name = "registration/signup.html"
+    form_class = UserCreationForm
+
+    # success_url = reverse_lazy("login")
+    success_url = "/accounts/login/"
+
 
 class LoginView(LogView):
-    template_name = "users/login.html"
+    template_name = "registration/login.html"
     sucess_url = reverse_lazy("listapp:indexpage")
     form_class = forms.UserLoginForm
     redirect_authenticated_user= True
